@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 
     struct calc{
         float calcul1;
@@ -10,7 +12,7 @@
 
     float CalculerMensualite(calc *calcUN, float mensualite, float capital, float taux_annuel, int nbAn); 
 
-    void afficherMensualite(float mensualite);
+    void afficherMensualite(std::vector<std::vector<std::string>>& data); // affichage    
 int main(){
     
     calc calcUN; 
@@ -39,7 +41,14 @@ int main(){
 
     mensualite = CalculerMensualite(&calcUN, mensualite, capital, taux_annuel, nbAn); 
 
-    afficherMensualite(mensualite); 
+    std::vector<std::vector<std::string>> data = {
+    {"Banque", "CA", "CN", "LCL", "BNP"},
+    {"Taux", "3%", "4%"},
+    {"Duree", "10 ans", "15 ans", "20 ans"},
+    {"Mensualite", std::to_string(mensualite),} // affihcage  
+};
+
+    afficherMensualite(data); // affichage 
 
     std::cout<< "calcul1 : " << calcUN.calcul1 << "calcul2 : " << calcUN.calcul2 << "calcul3 : " << calcUN.calcul3 << std::endl; 
     //calcul 
