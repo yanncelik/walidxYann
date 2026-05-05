@@ -1,16 +1,21 @@
+#include <vector>
+#include <iostream>
+#include <Compte.hpp>
+
 class Banque
 {
 
     private:
         std::string m_nom; 
 
-        std::vector<Compte> Comptes; 
+        std::vector<Compte*> comptes; 
+
+        int u_numCompte;
     public:
 
-        Banque::Banque(std::string nom): m_nom(nom);
+        Banque(std::string nom): m_nom(nom), u_numCompte(0){}
 
-        Compte Banque::ajouterCompte()
-        {
-            Comptes.pusback(Compte); 
-        }
-} 
+        void ajouterCompte(Compte* compte1);
+        
+};
+

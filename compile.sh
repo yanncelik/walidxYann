@@ -2,8 +2,11 @@
 
 OUTPUT="main"
 
-# Compilation avec chemin vers Include
-g++ -std=c++17 main.cpp -IInclude -o $OUTPUT
+# Liste des fichiers sources
+SRC="main.cpp Compte.cpp Banque.cpp Utilisateur.cpp"
+
+# Compilation
+g++ -std=c++17 $SRC -IInclude -o $OUTPUT
 
 if [ $? -eq 0 ]; then
     echo "Compilation réussie ✔"

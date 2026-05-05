@@ -1,3 +1,7 @@
+#include <vector>
+#include <iostream>
+#include <Compte.hpp>
+
 class Utilisateur
 {
 
@@ -7,11 +11,17 @@ class Utilisateur
         std::vector<Compte*> comptes;
 
         std::string m_nom; 
+
+        int u_numCompte; 
+
     public: 
 
-    Utilisateur::Utilisateur(float capital, int nbAn,float taux_annuel) : m_capital(capital), m_nbAn(nbAn), m_tauxAnnuel(taux_annuel) {}; 
+        Utilisateur(std::string nom) : m_nom(nom){}
 
-    void Utilisateur::ajouterCompte(Compte compte1);
+        void ajouterCompte(Compte *compte1);
 
-    void Utilisateur::afficherCompte();
-}
+        void ChoisirCompte();
+
+        std::string getUserName();
+
+};

@@ -2,6 +2,9 @@
 #include <Utilisateur.hpp> 
 #include <Banque.hpp>
 #include <Compte.hpp> 
+#include <vector>
+#include <cstdio>
+#include <cstring>
 
     //void initValeurs(float mensualite, float capital); 
 
@@ -9,163 +12,216 @@
 
     //void afficherMensualite(float mensualite);
 
+    /*
+    */
+    void addUser(Utilisateur* user);
+
+    void addUser(Utilisateur** user, std::string nom); //objet utilisateur)
+
+    Compte* addAccount(std::vector<Utilisateur*> &userTab, std::vector<Banque*> &BankTab);
+
+    void afficherCompte(std::vector<Utilisateur*> &userTab);
+
+    Utilisateur* chercherUtilisateur(std::vector<Utilisateur*> &userTab);
+
+    void recupUtilisateur(std::vector<Utilisateur*> &userTab);
 int main(){
 
-    std::vector<Utilisateur> userTab; 
+    std::vector<Utilisateur*> userTab; 
 
-    Banque CA("credit agricole"), CM("credit mutuelle"), LCL("LCL"), BNP("BNP");//création des objets Banque 
+    Utilisateur *user1 = nullptr;
+    Compte *Compte1 = nullptr; 
 
-    std::cout << "souhaitez ajouter un utilisateur ? : Y/N \n"; 
+    Banque* CA = new Banque("credit agricole");
+    Banque* CM = new Banque("credit mutuelle");
+    Banque* LCL = new Banque("LCL");
+    Banque* BNP = new Banque("BNP");
 
-    char saisie = 'a'; 
+    std::vector<Banque*> BankTab = {CA, CM, LCL, BNP};
 
-    std::cin >> saisie; 
-
-    if((saisie == y) || (saisie == Y))
+    while(1)
     {
-        std::cout << "entrez votre nom\n" << std::endl;
-        
-        std::cin >>nom; 
-        
-        Utilisateur user1(nom); //objet utilisateur
 
-        userTab.pushback(user1);
+        std::cout << "ajouter un utilisateur ? : 1, creer un compte : 2, afficher un compte : 3, sortie : 4 \n"; 
         
-    }
-
-    //Creation du compte 
-    
-    std::cout <<"souhaitez vous creer un compte ? : Y/N\n";
-
-    saisie = 'a';
-
-    std::cin >> saisie; 
-
-    if((saisie == y) || (saisie == Y))  
-    {  
-        float mensualite, capital;
+        int saisie = 0;
         
-        float taux_annuel;
+        std::cin >> saisie; 
         
-        int nbAn;  
-        
-        std::string nom;
-        std::string banque;
-        
-        std::cout << "chez quel banque souhaitez vous devenir adhérent (CA, CM, LCL, BNP)\n" << std::endl;
-        
-        std::cin >> banque; 
-        
-        std::cout << "montant du capitale emprunte ? : \n" << std::endl;
-        
-        std::cin >>capital; 
-        
-        std::cout << "Nombre d'années ? : \n"; 
-        
-        std::cin >> nbAn; 
-        
-        do
+        if(saisie == 1)
         {
-            std::cout << "Taux annuel (3 ou 4 %) ? : \n";
-            
-            std:: cin >> taux_annuel;
-        }while(!(taux_annuel == 3) || (taux_annuel == 4));
+            addUser(user1);
+            userTab.push_back(user1);
+        }
         
-        compte Compte1(banque,capital, nbAn, taux_annuel);
-        
-        //CREATION DE L'OBJET UTILISATEUR INITIALISE (appel du constructeur)
-        
-        //mensualite = CalculerMensualite(&calcUN, mensualite, capital, taux_annuel, nbAn); 
-        
-        //afficherMensualite(mensualite); 
-        
-        //std::cout<< "calcul1 : " << calcUN.calcul1 << "calcul2 : " << calcUN.calcul2 << "calcul3 : " << calcUN.calcul3 << std::endl; 
-        
-        //calcul  
-        
-        Utilisateur.ajouterCompte(&compte1);
-        
-        //enregistrement de l'objet compte auprès de l'objet banque correspondant 
-        switch(banque)
+        if(saisie == 2)
         {
-            case "CA":
-            CA.ajouterCompte(&Compte1);
-            case "CM":
-            CM.ajouterCompte(&Compte1);
-            case "LCL":
-            LCL.ajouterCompte(&Compte1);
-            case "BNP":
-            BNP.ajouterCompte(&Compte1);
+            Compte1 = addAccount(userTab, BankTab);
             
-            default:
-            std::cout<<"erreur de saisie\n";
+        }
+        
+        if(saisie == 3)
+        {
+            afficherCompte(userTab);
+        }
+        
+        if(saisie == 4)
+        {
+            break;
         }
     }
-    
-    std::cout<<"souhaitez vous afficher un compte ? "
-    
-    saisie = 'a';
+        
 
-    std::cin >> saisie; 
+    return 0; 
+}
 
-    if((saisie == y) || (saisie == Y))  
+void addUser(Utilisateur* user1)
+{
+
+    std::string nom; 
+
+    std::cout << "entrez votre nom\n" << std::endl;
+    
+    std::cin >> nom; 
+    
+    user1 = new Utilisateur(nom); //objet utilisateur
+        
+}
+
+Compte* addAccount(std::vector<Utilisateur*> &userTab, std::vector<Banque*> &BankTab)
+{
+    Utilisateur* currentUser = chercherUtilisateur(userTab);
+
+    Compte* compte = nullptr; 
+
+    //Creation du compte 
+
+    float capital;
+    
+    float taux_annuel;
+    
+    int nbAn;  
+    
+    std::string nom;
+    std::string banque; 
+    int idBanque = 0;
+    
+    std::cout << "chez quel banque souhaitez vous devenir adhérent (CA = 1, CM = 2, LCL = 3, BNP = 4)\n" << std::endl;
+    
+    std::cin >> idBanque; 
+    
+    std::cout << "montant du capitale emprunte ? : \n" << std::endl;
+    
+    std::cin >>capital; 
+    
+    std::cout << "Nombre d'années ? (10, 15 ou 20 ans) : \n"; 
+    
+    std::cin >> nbAn; 
+    
+    do
     {
+        std::cout << "Taux annuel (3 ou 4 %) ? : \n";
+        
+        std::cin >> taux_annuel;
 
-        Utilisateur *currentUser = NULL; 
+    }while(!(taux_annuel == 3) || (taux_annuel == 4));
+    
+    compte = new Compte(banque,capital, nbAn, taux_annuel);
+
+    //enregistrement de l'objet compte auprès de l'objet banque correspondant 
+    switch(idBanque)
+    {
+        case 1:
+            BankTab[0]->ajouterCompte(compte); 
+            break;
+        case 2:
+            BankTab[1]->ajouterCompte(compte);
+            break;
+        case 3:
+            BankTab[2]->ajouterCompte(compte);
+            break;
+        case 4:
+            BankTab[3]->ajouterCompte(compte);
+            break;
+        
+        default:
+        std::cout<<"erreur de saisie\n";
+    }    
+
+    currentUser->ajouterCompte(compte);
+
+    return compte; 
+
+}
+
+void afficherCompte(std::vector<Utilisateur*> &userTab)
+{
+        Utilisateur* currentUser = chercherUtilisateur(userTab);
+
+        //on affiche le compte de l'utilisateur qui a été trouvé 
+        currentUser->ChoisirCompte();
+}
+
+Utilisateur* chercherUtilisateur(std::vector<Utilisateur*>& userTab)
+{
+        Utilisateur* currentUser = NULL; 
 
         std::string utilisateur; 
 
-        std::cout << "entrez le nom de l'utilisateur";
+        std::cout << "entrez le nom de l'utilisateur : \n\n";
 
         std::cin >> utilisateur; 
 
-        for(int i = 0; i < (length(userTab) - 1), i++)
-        {
+        int tailleTab = 0;
 
-            if(utilisateur == userTab[i]->m_nom)
+        tailleTab = userTab.size(); 
+
+              //recherche par nom dans tous les objets Utilisateur 
+        for(int i = 0; i < tailleTab; i++)
+        {
+          
+            //if(utilisateur == userTab[i]->m_nom)
+            if(utilisateur == (userTab[i]->getUserName()))
             {
                 currentUser = userTab[i];
 
+                //pas de réponse retournée 
                 if(currentUser == NULL)
-                    cout <<"attention, erreur de recup. de l'utilisateur ! \n";
-        
+                    std::cout <<"attention, erreur de recup. de l'utilisateur ! \n";
+                
+                //si réponse, on sort de la boucle 
                 break; 
             }
 
             std::cout << "aucun utilisateur n'a ete trouve :/ ";
         }
 
-        curentUser->afficherCompte();
+        return currentUser; 
+}
 
+void recupUtilisateur(std::vector<Utilisateur*> &userTab) //lit dans un fichier les utilisateurs déjà enregistrés
+{
+    Utilisateur* prevUser = nullptr; 
+
+    char* utilisateur; 
+    
+    FILE* test =  fopen("donnees.txt","r");
+
+    if(test !=NULL)
+    {    
+        while(fscanf(test, "%s", utilisateur)==1)
+        {
+            int len = (int)strlen(utilisateur);
+            std::string userToStr(utilisateur, len);
+            addUser(&prevUser, userToStr); //ajoute les utilisateurs trouvés au programme 
+            userTab.push_back(prevUser); 
+            prevUser = nullptr; //on récupère prevUser pour initialiser un autre objet
+        }
+        
     }
-
-    return 0; 
 }
-
-float CalculerMensualite(calc *calcStruct, float mensualite, float capital, float taux_annuel, int nbAn){
-
-    int nbMois;
-
-    float taux_mensuel;
-
-    taux_mensuel = (taux_annuel/100)/12;
-
-    calcStruct->calcul1 = capital * taux_mensuel;
-
-    calcStruct->calcul2 = (1 + taux_mensuel)*nbMois;
-
-    calcStruct->calcul3 = calcStruct->calcul2 - 1;
-
-    mensualite = calcStruct->calcul1 * (calcStruct->calcul2 / calcStruct->calcul3);
-
-    return mensualite; 
-}
-
-void afficherMensualite(float mensualite){
-
-    std::cout << "mensualite : " << mensualite <<std::endl; 
-
-    getchar(); 
-
-    getchar();
+   
+void addUser(Utilisateur** prevUser, std::string nom) 
+{
+    *prevUser = new Utilisateur(nom);
 }
