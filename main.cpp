@@ -205,7 +205,7 @@ void recupUtilisateur(std::vector<Utilisateur*> &userTab) //lit dans un fichier 
 
     char* utilisateur; 
     
-    FILE* test =  fopen("donnees.txt","r");
+    FILE* test =  fopen("donnees.txt","r");//test 
 
     if(test !=NULL)
     {    
