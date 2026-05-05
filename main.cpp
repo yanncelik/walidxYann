@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstdio>
 #include <cstring>
+#includ <cstdlib>
 
     //void initValeurs(float mensualite, float capital); 
 
@@ -200,15 +201,17 @@ Utilisateur* chercherUtilisateur(std::vector<Utilisateur*>& userTab)
 }
 
 void recupUtilisateur(std::vector<Utilisateur*> &userTab) //lit dans un fichier les utilisateurs déjà enregistrés
-{
+{ 
+
     Utilisateur* prevUser = nullptr; 
 
-    char* utilisateur; 
-    
+    char* text = (char*)malloc(sizeof(100)); 
+    char* newText = (char*)malloc(sizeof(100));
     FILE* test =  fopen("donnees.txt","r");//test 
 
     if(test !=NULL)
     {    
+        /*
         while(fscanf(test, "%s", utilisateur)==1)
         {
             int len = (int)strlen(utilisateur);
@@ -216,6 +219,53 @@ void recupUtilisateur(std::vector<Utilisateur*> &userTab) //lit dans un fichier 
             addUser(&prevUser, userToStr); //ajoute les utilisateurs trouvés au programme 
             userTab.push_back(prevUser); 
             prevUser = nullptr; //on récupère prevUser pour initialiser un autre objet
+        }
+        */
+
+
+        while(fgets(text, 100, fichier != NULL))
+        {
+            int len = 0; 
+            int totLen = 100; 
+
+            std::string informations[5];
+
+            for(int i = 0; i < 5; i++)
+            {
+                while(text[len] != '\n')
+                {
+                    len++; 
+                }
+                
+                std::string textToString(text, len)
+                informations[i] = textToString;
+    
+                for(int i = len, i < prevLen; i++)
+                {
+                    newText[i - len] = text[i];
+                }
+
+                totLen = totLen - len; 
+
+                text = (char*)realloc(sizeof(totLen));
+
+
+            }
+
+
+            len = 0;
+            
+            while(newtext[len] != '\n')
+            {
+                len++; 
+            }
+
+            std::string banque(newText, (len));
+
+            for(int i = len, i < 100; i++)
+            {
+                newText[i - len] = text[i];
+            } 
         }
         
     }
