@@ -40,3 +40,14 @@ Clonez le dépôt :
 
 ```bash
 git clone https://github.com/yanncelik/walidxYann
+```
+
+Compiler (à la racine du dossier) : 
+
+```bash
+./compile.sh 
+```
+
+## 🎬 Démonstration 
+
+[Voir la vidéo youtube](https://www.youtube.com/watch?v=KSvZX2hudzc)
