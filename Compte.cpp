@@ -11,7 +11,7 @@ Compte::Compte(int banque, float capital, int nbAn,float taux_annuel) : m_banque
 { 
 }
 
-void Compte::initAffichage1()
+void Compte::initAffichage1() //test
 {
     //titres 
     //tableauAffichage1.push_back("Banque");
