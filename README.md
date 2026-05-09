@@ -39,4 +39,4 @@ Le projet a été développé en **C++ orienté objet** sous **Windows avec WSL2
 Clonez le dépôt :
 
 ```bash
-git clone <URL_DU_REPO>
+git clone https://github.com/yanncelik/walidxYann
