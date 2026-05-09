@@ -1,6 +1,6 @@
 # 🏦 walidXYann
 
-Projet de programmation orientée objet en **C++** réalisé par **Yann CELIK** et **Walid EL ANSARI**.
+Projet de programmation orientée objet en **C++** réalisé par **Yann CELIK** et **Walid EL ANSSARI**.
 
 ## 📌 Description
 
