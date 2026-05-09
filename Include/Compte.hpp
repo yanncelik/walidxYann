@@ -9,7 +9,7 @@ class Compte
 {
 
     private:
-        std::string m_banque;   //nom de la banque 
+        int m_banque;   //nom de la banque 
 
         float m_capital;    //capital emprunté à la banque 
 
@@ -37,7 +37,7 @@ class Compte
 
     public: 
 
-        Compte(std::string banque, float capital, int nbAn,float taux_annuel);
+        Compte(int idBanque, float capital, int nbAn,float taux_annuel);
 
         void initAffichage1(); 
 
@@ -58,6 +58,8 @@ class Compte
         void afficherRemboursements();
 
         void afficherValeursTotales();
+
+        void afficherDonnees();
 
 };
 

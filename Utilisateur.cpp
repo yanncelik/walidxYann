@@ -29,7 +29,7 @@ void Utilisateur::ChoisirCompte(){
     {
         choixCompte = 0; 
         
-        std::cout<<"vous possédez " << this->u_numCompte <<" compte(s) !, lequel souhaitez vous consulter ?\n";
+        std::cout<<"\nvous possédez " << this->u_numCompte <<" compte(s) !, lequel souhaitez vous consulter ? (entrez le numéro, i.e : 1, 2, 3...)  : ";
         
         std::cin >> choixCompte; 
 
@@ -57,3 +57,7 @@ std::string Utilisateur::getUserName()
     return nom;
 }
 
+void Utilisateur::existe()
+{
+    std::cout << "j'existe"<<std::endl;
+}

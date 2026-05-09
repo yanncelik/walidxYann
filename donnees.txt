@@ -1,2 +1,4 @@
-Yann\nLCL\n1000\n10\n3\n
-
+Yann 3 1000 10 3 
+Alice 4 2000 15 4
+Yohann 3 5000 20 4
+Lydia 3 50000 20 4

@@ -24,4 +24,6 @@ class Utilisateur
 
         std::string getUserName();
 
+        void existe();
+
 };
