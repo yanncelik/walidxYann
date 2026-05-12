@@ -51,3 +51,8 @@ Compiler (à la racine du dossier) :
 ## 🎬 Démonstration 
 
 [Voir la vidéo youtube](https://www.youtube.com/watch?v=KSvZX2hudzc)
+
+
+## ⬆️ Mise à jour avec le code CSV de Yassine 
+
+<img width="1007" height="260" alt="image" src="https://github.com/user-attachments/assets/d0ce32a0-f217-4439-a088-0753b8689d08" />
