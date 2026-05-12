@@ -3,12 +3,22 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
+#include <fstream>
+#include <iomanip>
 
 #define Titres 0
 #define valeursAff1 1
 
 Compte::Compte(int banque, float capital, int nbAn,float taux_annuel) : m_banque(banque), m_capital(capital), m_nbAn(nbAn), m_tauxAnnuel(taux_annuel)
 { 
+
+    std::string groupe2 = "Walid et Yann";
+    
+    std::string banqueToString = getBankToString(banque);
+
+    calculerMensualite();
+
+    this->ajouterResultatCSV(groupe2, (double)capital, banqueToString, (double)taux_annuel, nbAn, (double)(this->interetEuroTotal));
 }
 
 void Compte::initAffichage1() //test
@@ -317,4 +327,65 @@ void Compte::afficherDonnees()
     
     std::cout <<"somme annuelle : " << somme_Annuelle << std::endl;
     
+}
+
+void Compte::ajouterResultatCSV(std::string groupe,
+                        double capital,
+                        std::string banque,
+                        double taux,
+                        int duree,
+                        double resultat) 
+{
+
+    std::ifstream testFile("banques.csv");
+    bool fichierExiste = testFile.good();
+    testFile.close();
+
+    std::ofstream file("banques.csv", std::ios::app);
+
+    if (!file) {
+        std::cerr << "Erreur : impossible d'ouvrir le fichier." << std::endl;
+        return;
+    }
+
+    if (!fichierExiste) {
+        file << "GROUPE;CAPITAL;BANQUE;TAUX;DUREE;RESULTAT\n";
+    }
+
+    file << groupe << ";"
+         << std::fixed << std::setprecision(2)
+         << capital << ";"
+         << banque << ";"
+         << taux << ";"
+         << duree << ";"
+         << resultat << "\n";
+
+    file.close();
+}
+
+std::string Compte::getBankToString(int banque)
+{
+    //(CA = 1, CM = 2, LCL = 3, BNP = 4)
+    std::string tempBanque; 
+
+    switch(banque)
+    {
+        case 1:
+            tempBanque = "CA";
+            break; 
+
+        case 2:
+            tempBanque = "CM";
+            break; 
+
+        case 3:
+            tempBanque = "LCL";
+            break; 
+
+        case 4:
+            tempBanque = "BNP";
+            break; 
+    }
+
+    return tempBanque; 
 }
