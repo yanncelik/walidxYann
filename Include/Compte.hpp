@@ -35,6 +35,8 @@ class Compte
 
         std::vector<std::vector<std::string>> tableauAffichage3; 
 
+       // static const std::string groupe = "Walid et Yann";
+
     public: 
 
         Compte(int idBanque, float capital, int nbAn,float taux_annuel);
@@ -60,6 +62,10 @@ class Compte
         void afficherValeursTotales();
 
         void afficherDonnees();
+
+        std::string getBankToString(int banque);
+
+        void ajouterResultatCSV(std::string groupe, double capital, std::string banque, double taux, int duree, double resultat);
 
 };
 
